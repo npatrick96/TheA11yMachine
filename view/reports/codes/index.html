@@ -216,27 +216,27 @@
         }
     </style>
     <script>
-    function sortByCategory(category) {
-        var results = document.querySelectorAll('.result');
-        var getCategoryOf = function (resultIndex) {
-            return results.item(resultIndex).getAttribute('data-result-level');
-        };
-        document.querySelector('#results').innerHTML =
-            Object
+        function sortByCategory(category) {
+            var results = document.querySelectorAll('.result');
+            var getCategoryOf = function(resultIndex) {
+                return results.item(resultIndex).getAttribute('data-result-level');
+            };
+            document.querySelector('#results').innerHTML =
+                Object
                 .keys(results)
                 .filter(
-                    function (a) {
+                    function(a) {
                         var categoryA = getCategoryOf(a);
                         return category === categoryA;
                     }
                 )
                 .map(
-                    function (i) {
+                    function(i) {
                         return results.item(i).outerHTML;
                     }
                 )
                 .join('\n');
-    }
+        }
     </script>
 </head>
 
@@ -247,7 +247,8 @@
     <div id="controls">
         <p>
             Sort by:
-            <input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sortByCategory('error')" />
+            <input type="radio" id="sort-by-errors" name="sort" value="errors"
+            onclick="sortByCategory('error')" />
             <label for="sort-by-errors">errors</label>
             <input type="radio" id="sort-by-warnings" name="sort" value="warnings" onclick="sortByCategory('warning')" />
             <label for="sort-by-warnings">warnings</label>
@@ -256,16 +257,19 @@
         </p>
     </div>
     <ul id="results">
-    <%
+        <%
       _.each(
           codes,
           function (code, index) {
               %>
-              <li class="result" data-result-type="<%- code.type %>" data-result-level="<%- code.level %>" data-result-index="<%- index %>">
-                <aside><%- code.type %></aside>
+            <li class="result" data-result-type="<%- code.type %>" data-result-level="<%- code.level %>" data-result-index="<%- index %>">
+                <aside>
+                    <%- code.type %>
+                </aside>
                 <h2>(<strong><a href="<%- code.reportUrl %>"><%- code.instances %></a></strong>) <%- code.level.charAt(0).toUpperCase() + code.level.substring(1).toLowerCase() %> - <%- code.message %></h2>
                 <% if ('a11y' === code.type) { %>
-                  <p class="notes">Note codes: <%=
+                    <p class="notes">Note codes:
+                        <%=
                     _.map(
                         code.noteCodes,
                         function (noteCode) {
@@ -274,14 +278,14 @@
                     )
                     .join(', ')
                   %> <code>#<%- code.code %></code>
-                  </p>
-                <% } %>
-              </li>
-              <%
+                    </p>
+                    <% } %>
+            </li>
+            <%
           }
       )
     %>
-  </ul>
+    </ul>
 </body>
 
 </html>
