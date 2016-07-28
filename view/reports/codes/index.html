@@ -231,6 +231,11 @@
                         return getReportScore(a) < getReportScore(b) ? 1 : -1;
                     }
                 )
+                .map(
+                    function (code) {
+                        return '<a href="http://www.w3.org/TR/WCAG20-TECHS/' + code + '.html">' + code + '</a> <small>(' + notes[code] + ')</small>';
+                    }
+                )
                 .join('\n');
     }
     </script>
