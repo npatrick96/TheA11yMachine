@@ -217,7 +217,7 @@
     </style>
     <script>
     /// add a sort function
-    function sortByCategory() {
+    function sortByCategory(category) {
         var results = document.querySelectorAll('.result');
         var getCategoryOf = function (resultIndex) {
             return results.item(resultIndex).getAttribute('data-result-level');
@@ -226,26 +226,10 @@
         document.querySelector('#results').innerHTML =
             Object
                 .keys(results)
-                .sort(
-                    function (a, b) {
+                .filter(
+                    function (a) {
                         var categoryA = getCategoryOf(a);
-                        var categoryB = getCategoryOf(b);
-
-                        if ('error' === categoryA) {
-                            return -1;
-                        } else if ('warning' === categoryA) {
-                            if ('error' === categoryB) {
-                                return 1;
-                            }
-
-                            return -1;
-                        }
-
-                        if ('notice' === categoryB) {
-                            return -1;
-                        }
-
-                        return 1;
+                        return category === categoryA;
                     }
                 )
                 .map(
@@ -265,12 +249,11 @@
     <div id="controls">
         <p>
             Sort by:
-            <!--<input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sort('error')" />-->
-            <input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sortByCategory()" />
+            <input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sortByCategory('error')" />
             <label for="sort-by-errors">errors</label>
-            <input type="radio" id="sort-by-warnings" name="sort" value="warnings" onclick="sort('warning')" />
+            <input type="radio" id="sort-by-warnings" name="sort" value="warnings" onclick="sortByCategory('warning')" />
             <label for="sort-by-warnings">warnings</label>
-            <input type="radio" id="sort-by-notices" name="sort" value="notices" onclick="sort('notice')" />
+            <input type="radio" id="sort-by-notices" name="sort" value="notices" onclick="sortByCategory('notice')" />
             <label for="sort-by-notices">notices</label>
         </p>
     </div>
