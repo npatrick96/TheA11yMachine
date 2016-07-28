@@ -216,27 +216,15 @@
         }
     </style>
     <script>
-        function sortByCategory(category) {
-            var results = document.querySelectorAll('.result');
-            var getCategoryOf = function(resultIndex) {
-                return results.item(resultIndex).getAttribute('data-result-level');
-            };
-            document.querySelector('#results').innerHTML =
-                Object
-                .keys(results)
-                .filter(
-                    function(a) {
-                        var categoryA = getCategoryOf(a);
-                        return category === categoryA;
-                    }
-                )
-                .map(
-                    function(i) {
-                        return results.item(i).outerHTML;
-                    }
-                )
-                .join('\n');
+    function toggleFilter(name) {
+        var classList = document.querySelector('#results').classList;
+
+        if (true === document.querySelector('#filter-' + name).checked) {
+            classList.remove('filter-' + name);
+        } else {
+            classList.add('filter-' + name);
         }
+    }
     </script>
 </head>
 
@@ -246,14 +234,25 @@
         <%- date %>.</p>
     <div id="controls">
         <p>
-            Sort by:
-            <input type="radio" id="sort-by-errors" name="sort" value="errors"
-            onclick="sortByCategory('error')" />
-            <label for="sort-by-errors">errors</label>
-            <input type="radio" id="sort-by-warnings" name="sort" value="warnings" onclick="sortByCategory('warning')" />
-            <label for="sort-by-warnings">warnings</label>
-            <input type="radio" id="sort-by-notices" name="sort" value="notices" onclick="sortByCategory('notice')" />
-            <label for="sort-by-notices">notices</label>
+          Filter by:
+          <input
+            type="checkbox"
+            id="filter-errors"
+            checked="checked"
+            onclick="toggleFilter('errors')" />
+          <label for="filter-errors">errors</label>
+          <input
+            type="checkbox"
+            id="filter-warnings"
+            checked="checked"
+            onclick="toggleFilter('warnings')" />
+          <label for="filter-warnings">warnings</label>
+          <input
+            type="checkbox"
+            id="filter-notices"
+            checked="checked"
+            onclick="toggleFilter('notices')" />
+          <label for="filter-notices">notices</label>
         </p>
     </div>
     <ul id="results">
