@@ -180,7 +180,38 @@
 <body>
   <h1>Accessibility report for <%- url %></h1>
   <p class="infos">Generated at <%- date %>.</p>
-
+  <div id="controls">
+    <p>
+      Sort by:
+      <input
+        type="radio"
+        id="sort-by-errors"
+        name="sort"
+        value="errors"
+        checked="checked"
+        onclick="sort('errors')" />
+      <label for="sort-by-errors">errors</label>
+      <input
+        type="radio"
+        id="sort-by-warnings"
+        name="sort"
+        value="warnings"
+        onclick="sort('warnings')" />
+      <label for="sort-by-warnings">warnings</label>
+      <input
+        type="radio"
+        id="sort-by-notices"
+        name="sort"
+        value="notices"
+        onclick="sort('notices')" />
+      <label for="sort-by-notices">notices</label>
+    </p>
+    <div class="all-notes">
+      <p>See all notes</p>
+      <ul>
+      </ul>
+    </div>
+</div>
   <ul id="results">
     <%
       _.each(
