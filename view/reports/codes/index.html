@@ -219,6 +219,7 @@
     function sort(name) {
         var reports = document.querySelectorAll('.report');
         var getReportScore = function (resultIndex) {
+            console.log(reports.item(resultIndex));
             return +reports.item(resultIndex).getAttribute('data-result-level');
         };
 
