@@ -216,13 +216,11 @@
         }
     </style>
     <script>
-    /// add a sort function
+    var results = document.querySelectorAll('.result');
+    var getCategoryOf = function (resultIndex) {
+        return results.item(resultIndex).getAttribute('data-result-level');
+    };
     function sortByCategory(category) {
-        var results = document.querySelectorAll('.result');
-        var getCategoryOf = function (resultIndex) {
-            return results.item(resultIndex).getAttribute('data-result-level');
-        };
-
         document.querySelector('#results').innerHTML =
             Object
                 .keys(results)
