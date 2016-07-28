@@ -263,6 +263,19 @@
   <p class="infos">Generated at <%- date %>.</p>
   <p class="infos"><%- code.message %></p>
 
+  <% if ('a11y' === code.type) { %>
+    <p class="notes">Note codes: <%=
+      _.map(
+          code.noteCodes,
+          function (noteCode) {
+              return '<a href="http://www.w3.org/TR/WCAG20-TECHS/' + noteCode + '.html">' + noteCode + '</a>';
+          }
+      )
+      .join(', ')
+    %>
+    </p>
+  <% } %>
+
   <ul id="reports">
     <%
       _.each(
