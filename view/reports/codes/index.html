@@ -216,6 +216,22 @@
         }
     </style>
     <script>
+    function sort(name) {
+        var reports = document.querySelectorAll('.report');
+        var getReportScore = function (resultIndex) {
+            return +reports.item(resultIndex).getAttribute('data-result-level');
+        };
+
+        document.querySelector('#reports').innerHTML =
+            Object
+                .keys(reports)
+                .sort(
+                    function (a, b) {
+                        return getReportScore(a) < getReportScore(b) ? 1 : -1;
+                    }
+                )
+                .join('\n');
+    }
     </script>
 </head>
 
