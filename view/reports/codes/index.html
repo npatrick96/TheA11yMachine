@@ -216,9 +216,8 @@
         }
     </style>
     <script>
-    var results = document.querySelectorAll('.result');
-
     function sortByCategory(category) {
+        var results = document.querySelectorAll('.result');
         var getCategoryOf = function (resultIndex) {
             return results.item(resultIndex).getAttribute('data-result-level');
         };
