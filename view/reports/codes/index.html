@@ -216,37 +216,7 @@
         }
     </style>
     <script>
-    function sort(name) {
-        <%
-      _.each(
-          codes,
-          function (code, index) {
-              %>
-            <li class="result" data-result-type="<%- code.type %>" data-result-level="<%- name %>" data-result-index="<%- index %>">
-                <aside>
-                    <%- code.type %>
-                </aside>
-                <h2>(<strong><a href="<%- code.reportUrl %>"><%- code.instances %></a></strong>) <%- code.level.charAt(0).toUpperCase() + code.level.substring(1).toLowerCase() %> - <%- code.message %></h2>
-                <% if ('a11y' === code.type) { %>
-                    <p class="notes">Note codes:
-                        <%=
-                    _.map(
-                        code.noteCodes,
-                        function (noteCode) {
-                            return '<a href="http://www.w3.org/TR/WCAG20-TECHS/' + noteCode + '.html">' + noteCode + '</a>';
-                        }
-                    )
-                    .join(', ')
-                  %> <code>#<%- code.code %></code>
-                    </p>
-                    <% } %>
-            </li>
-            <%
-          }
-      )
-    %>
-        };
-    }
+    /// add a sort function
     </script>
 </head>
 
@@ -266,8 +236,32 @@
         </p>
     </div>
     <ul id="results">
-        sort('error');
-    </ul>
+    <%
+      _.each(
+          codes,
+          function (code, index) {
+              %>
+              <li class="result" data-result-type="<%- code.type %>" data-result-level="<%- code.level %>" data-result-index="<%- index %>">
+                <aside><%- code.type %></aside>
+                <h2>(<strong><a href="<%- code.reportUrl %>"><%- code.instances %></a></strong>) <%- code.level.charAt(0).toUpperCase() + code.level.substring(1).toLowerCase() %> - <%- code.message %></h2>
+                <% if ('a11y' === code.type) { %>
+                  <p class="notes">Note codes: <%=
+                    _.map(
+                        code.noteCodes,
+                        function (noteCode) {
+                            return '<a href="http://www.w3.org/TR/WCAG20-TECHS/' + noteCode + '.html">' + noteCode + '</a>';
+                        }
+                    )
+                    .join(', ')
+                  %> <code>#<%- code.code %></code>
+                  </p>
+                <% } %>
+              </li>
+              <%
+          }
+      )
+    %>
+  </ul>
 </body>
 
 </html>
