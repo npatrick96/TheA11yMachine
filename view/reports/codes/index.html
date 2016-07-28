@@ -217,6 +217,44 @@
     </style>
     <script>
     /// add a sort function
+    function sortByCategory() {
+        var results = document.querySelectorAll('.result');
+        var getCategoryOf = function (resultIndex) {
+            return results.item(resultIndex).getAttribute('data-result-level');
+        };
+
+        document.querySelector('#results').innerHTML =
+            Object
+                .keys(results)
+                .sort(
+                    function (a, b) {
+                        var categoryA = getCategoryOf(a);
+                        var categoryB = getCategoryOf(b);
+
+                        if ('error' === categoryA) {
+                            return -1;
+                        } else if ('warning' === categoryA) {
+                            if ('error' === categoryB) {
+                                return 1;
+                            }
+
+                            return -1;
+                        }
+
+                        if ('notice' === categoryB) {
+                            return -1;
+                        }
+
+                        return 1;
+                    }
+                )
+                .map(
+                    function (i) {
+                        return results.item(i).outerHTML;
+                    }
+                )
+                .join('\n');
+    }
     </script>
 </head>
 
@@ -227,7 +265,8 @@
     <div id="controls">
         <p>
             Sort by:
-            <input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sort('error')" />
+            <!--<input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sort('error')" />-->
+            <input type="radio" id="sort-by-errors" name="sort" value="errors" checked="checked" onclick="sortByCategory()" />
             <label for="sort-by-errors">errors</label>
             <input type="radio" id="sort-by-warnings" name="sort" value="warnings" onclick="sort('warning')" />
             <label for="sort-by-warnings">warnings</label>
