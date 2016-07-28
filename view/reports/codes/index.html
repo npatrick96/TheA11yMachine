@@ -216,28 +216,7 @@
         }
     </style>
     <script>
-    function sortByCategory(category) {
-        var results = codes;
-        var getCategoryOf = function(resultIndex) {
-            return results.item(resultIndex).getAttribute('data-result-level');
-        };
-        document.querySelector('#results').innerHTML =
-            Object
-            .keys(results)
-            .filter(
-                function(a) {
-                    var categoryA = getCategoryOf(a);
-                    return category === categoryA;
-                }
-            )
-            .map(
-                function(i) {
-                    return results.item(i).outerHTML;
-                }
-            )
-            .join('\n');
-    }
-        /*function sortByCategory(category) {
+        function sortByCategory(category) {
             var results = document.querySelectorAll('.result');
             var getCategoryOf = function(resultIndex) {
                 return results.item(resultIndex).getAttribute('data-result-level');
@@ -257,7 +236,7 @@
                     }
                 )
                 .join('\n');
-        }*/
+        }
     </script>
 </head>
 
