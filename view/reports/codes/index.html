@@ -217,10 +217,11 @@
     </style>
     <script>
     var results = document.querySelectorAll('.result');
-    var getCategoryOf = function (resultIndex) {
-        return results.item(resultIndex).getAttribute('data-result-level');
-    };
+
     function sortByCategory(category) {
+        var getCategoryOf = function (resultIndex) {
+            return results.item(resultIndex).getAttribute('data-result-level');
+        };
         document.querySelector('#results').innerHTML =
             Object
                 .keys(results)
